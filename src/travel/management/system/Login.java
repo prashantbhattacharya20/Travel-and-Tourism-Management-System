@@ -3,8 +3,12 @@ package travel.management.system;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
+
+    JButton login, signUp, fPassword;
 
     Login(){
         setSize(900,500);
@@ -51,25 +55,28 @@ public class Login extends JFrame {
         tfPassword.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfPassword);
 
-        JButton login = new JButton("LOGIN");
+        login = new JButton("LOGIN");
         login.setBounds(60,240,130,30);
         login.setBackground(new Color(2, 150, 169));
         login.setForeground(Color.white);
         login.setBorder(new LineBorder(new Color(2, 150, 169)));
+        login.addActionListener(this);
         p2.add(login);
 
-        JButton signUp = new JButton("SIGN UP");
+        signUp = new JButton("SIGN UP");
         signUp.setBounds(235,240,130,30);
         signUp.setBackground(new Color(2, 150, 169));
         signUp.setForeground(Color.white);
         signUp.setBorder(new LineBorder(new Color(2, 150, 169)));
+        signUp.addActionListener(this);
         p2.add(signUp);
 
-        JButton fPassword = new JButton("FORGET PASSWORD");
+        fPassword = new JButton("FORGET PASSWORD");
         fPassword.setBounds(140,290,150,30);
         fPassword.setBackground(new Color(2, 150, 169));
         fPassword.setForeground(Color.white);
         fPassword.setBorder(new LineBorder(new Color(2, 150, 169)));
+        fPassword.addActionListener(this);
         p2.add(fPassword);
 
         JLabel trouble = new JLabel("(Trouble in login..)");
@@ -79,6 +86,19 @@ public class Login extends JFrame {
         p2.add(trouble);
 
         setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent ae){
+        if (ae.getSource() == login){
+
+        } else if (ae.getSource() == signUp) {
+            setVisible(false);
+            new Signup();
+
+        } else {
+            setVisible(false);
+            new ForgetPassword();
+        }
     }
 
     public static void main(String[] args) {
