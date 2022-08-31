@@ -2,8 +2,14 @@ package travel.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.security.Security;
 
-public class Signup extends JFrame {
+public class Signup extends JFrame implements ActionListener {
+
+    JButton create,back;
+    JTextField tfUsername, tfName, tfPassword, tfAnswer;
+    Choice security;
 
     Signup(){
         setBounds(350,200,900,360);
@@ -21,7 +27,7 @@ public class Signup extends JFrame {
         lblUsername.setBounds(50,20,125,25);
         p1.add(lblUsername);
 
-        JTextField tfUsername = new JTextField();
+        tfUsername = new JTextField();
         tfUsername.setBounds(200,20,180,25);
         tfUsername.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfUsername);
@@ -31,7 +37,7 @@ public class Signup extends JFrame {
         lblName.setBounds(50,60,125,25);
         p1.add(lblName);
 
-        JTextField tfName = new JTextField();
+        tfName = new JTextField();
         tfName.setBounds(200,60,180,25);
         tfName.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfName);
@@ -41,7 +47,7 @@ public class Signup extends JFrame {
         lblPassword.setBounds(50,100,125,25);
         p1.add(lblPassword);
 
-        JTextField tfPassword = new JTextField();
+        tfPassword = new JTextField();
         tfPassword.setBounds(200,100,180,25);
         tfPassword.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfPassword);
@@ -51,7 +57,7 @@ public class Signup extends JFrame {
         lblSecurity.setBounds(50,140,150,25);
         p1.add(lblSecurity);
 
-        Choice security = new Choice();
+        security = new Choice();
         security.add("Fav Marvel Super Hero");
         security.add("Captain America or Iron Man");
         security.add("High School Name");
@@ -65,19 +71,20 @@ public class Signup extends JFrame {
         lblAnswer.setBounds(50,180,125,25);
         p1.add(lblAnswer);
 
-        JTextField tfAnswer = new JTextField();
+        tfAnswer = new JTextField();
         tfAnswer.setBounds(200,180,180,25);
         tfAnswer.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfAnswer);
 
-        JButton create = new JButton("CREATE");
+        create = new JButton("CREATE");
         create.setBackground(Color.white);
         create.setForeground(new Color(2, 150, 169));
         create.setFont(new Font("Tahoma",Font.BOLD, 14));
         create.setBounds(80,250,100,30);
+        create.addActionListener(this);
         p1.add(create);
 
-        JButton back = new JButton("BACK");
+        back = new JButton("BACK");
         back.setBackground(Color.white);
         back.setForeground(new Color(2, 150, 169));
         back.setFont(new Font("Tahoma",Font.BOLD, 14));
@@ -89,10 +96,35 @@ public class Signup extends JFrame {
         ImageIcon i2 = new ImageIcon(img);
         JLabel image = new JLabel(i2);
         image.setBounds(580,40,250,250);
+        back.addActionListener(this);
         add(image);
 
         setVisible(true);
     }
+
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == create) {
+            String username = tfUsername.getText();
+            String name = tfName.getText();
+            String password = tfPassword.getText();
+            String question = security.getSelectedItem();
+            String answer = tfAnswer.getText();
+
+            String query = "insert into account values('"+username+"', '"+name+"', '"+password+"', '"+question+"', '"+answer+"')";
+            try{
+                Conn c = new Conn();
+                c.s.executeUpdate(query);
+
+                JOptionPane.showMessageDialog(null, "Account Created Successfully");
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == back) {
+            setVisible(false);
+            new Login();
+        }
+    }
+
     public static void main(String[] args){
         new Signup();
     }
