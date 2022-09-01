@@ -129,7 +129,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
         try{
            Conn c = new Conn();
-           ResultSet rs = c.s.executeQuery("select * from account where username = 'prashant'");
+           ResultSet rs = c.s.executeQuery("select * from account where username = '"+username+"'");
             while (rs.next()){
                 labelUsername.setText(rs.getString("username"));
                 labelName.setText(rs.getString("name"));

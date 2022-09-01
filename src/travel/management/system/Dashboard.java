@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Dashboard extends JFrame implements ActionListener {
 
     String username;
-    JButton addPersonalDetails;
+    JButton addPersonalDetails,viewPersonalDetails;
 
     Dashboard(String username){
         this.username = username;
@@ -66,7 +66,7 @@ public class Dashboard extends JFrame implements ActionListener {
         deletePersonalDetails.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
         p2.add(deletePersonalDetails);
 
-        JButton viewPersonalDetails = new JButton("View Personal Details");
+        viewPersonalDetails = new JButton("View Personal Details");
         viewPersonalDetails.setBounds(0,147,300,50);
         viewPersonalDetails.setBackground(new Color(59, 153, 203));
         viewPersonalDetails.setForeground(Color.BLACK);
@@ -194,7 +194,8 @@ public class Dashboard extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == addPersonalDetails){
             new AddCustomer(username);
-
+        } else if (ae.getSource() == viewPersonalDetails) {
+            new ViewCustomer(username);
         }
     }
 
