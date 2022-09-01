@@ -2,10 +2,15 @@ package travel.management.system;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Dashboard extends JFrame {
+public class Dashboard extends JFrame implements ActionListener {
 
-    Dashboard(){
+    String username;
+    JButton addPersonalDetails;
+
+    Dashboard(String username){
+        this.username = username;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(null);
 
@@ -34,7 +39,7 @@ public class Dashboard extends JFrame {
         p2.setBounds(0,65,300, 800);
         add(p2);
 
-        JButton addPersonalDetails = new JButton("Add Personal Details");
+        addPersonalDetails = new JButton("Add Personal Details");
         addPersonalDetails.setBounds(0,0,300,49);
         addPersonalDetails.setBackground(new Color(59, 153, 203));
         addPersonalDetails.setForeground(Color.BLACK);
@@ -186,7 +191,14 @@ public class Dashboard extends JFrame {
         setVisible(true);
     }
 
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == addPersonalDetails){
+            new AddCustomer(username);
+
+        }
+    }
+
     public static void main (String[] args){
-        new Dashboard();
+        new Dashboard("");
     }
 }
