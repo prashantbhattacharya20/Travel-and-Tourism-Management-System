@@ -3,12 +3,14 @@ package travel.management.system;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener {
 
     JButton login, signUp, fPassword;
+    JTextField tfUsername;
+    JPasswordField tfPassword;
 
     Login(){
         setSize(900,500);
@@ -40,7 +42,7 @@ public class Login extends JFrame implements ActionListener {
         username.setFont(new Font("SAN SERIF", Font.PLAIN, 20));
         p2.add(username);
 
-        JTextField tfUsername = new JTextField();
+        tfUsername = new JTextField();
         tfUsername.setBounds(60, 110, 300, 30);
         tfUsername.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfUsername);
@@ -50,9 +52,10 @@ public class Login extends JFrame implements ActionListener {
         password.setFont(new Font("SAN SERIF", Font.PLAIN, 20));
         p2.add(password);
 
-        JTextField tfPassword = new JTextField();
+        tfPassword = new JPasswordField();
         tfPassword.setBounds(60, 180, 300, 30);
         tfPassword.setBorder(BorderFactory.createEmptyBorder());
+        tfPassword.setEchoChar('*');
         p2.add(tfPassword);
 
         login = new JButton("LOGIN");
@@ -90,7 +93,23 @@ public class Login extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == login){
+            try{
+                String username = tfUsername.getText();
+                String pass = tfPassword.getText();
 
+                String query = "select * from account where username = '"+username+"' AND password = '"+pass+"'";
+                Conn c = new Conn();
+                ResultSet rs = c.s.executeQuery(query);
+                if (rs.next()){
+                    setVisible(false);
+                    new Loading(username);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
+                }
+
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         } else if (ae.getSource() == signUp) {
             setVisible(false);
             new Signup();
