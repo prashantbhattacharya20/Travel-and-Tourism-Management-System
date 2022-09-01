@@ -46,6 +46,7 @@ public class Dashboard extends JFrame implements ActionListener {
         addPersonalDetails.setFont(new Font("Tahoma", Font.BOLD,20));
         addPersonalDetails.setMargin(new Insets(0,0,0,60));
         addPersonalDetails.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        addPersonalDetails.addActionListener(this);
         p2.add(addPersonalDetails);
 
         JButton updatePersonalDetails = new JButton("Update Personal Details");
@@ -73,6 +74,7 @@ public class Dashboard extends JFrame implements ActionListener {
         viewPersonalDetails.setFont(new Font("Tahoma", Font.BOLD,20));
         viewPersonalDetails.setMargin(new Insets(0,0,0,60));
         viewPersonalDetails.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        viewPersonalDetails.addActionListener(this);
         p2.add(viewPersonalDetails);
 
         JButton checkPackage = new JButton("Check Package");
