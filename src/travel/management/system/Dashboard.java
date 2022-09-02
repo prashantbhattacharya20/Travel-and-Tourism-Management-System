@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Dashboard extends JFrame implements ActionListener {
 
     String username;
-    JButton addPersonalDetails,viewPersonalDetails;
+    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage;
 
     Dashboard(String username){
         this.username = username;
@@ -49,13 +49,14 @@ public class Dashboard extends JFrame implements ActionListener {
         addPersonalDetails.addActionListener(this);
         p2.add(addPersonalDetails);
 
-        JButton updatePersonalDetails = new JButton("Update Personal Details");
+        updatePersonalDetails = new JButton("Update Personal Details");
         updatePersonalDetails.setBounds(0,49,300,50);
         updatePersonalDetails.setBackground(new Color(59, 153, 203));
         updatePersonalDetails.setForeground(Color.BLACK);
         updatePersonalDetails.setFont(new Font("Tahoma", Font.BOLD,20));
         updatePersonalDetails.setMargin(new Insets(0,0,0,60));
         updatePersonalDetails.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        updatePersonalDetails.addActionListener(this);
         p2.add(updatePersonalDetails);
 
         JButton deletePersonalDetails = new JButton("Delete Personal Details");
@@ -77,13 +78,14 @@ public class Dashboard extends JFrame implements ActionListener {
         viewPersonalDetails.addActionListener(this);
         p2.add(viewPersonalDetails);
 
-        JButton checkPackage = new JButton("Check Package");
+        checkPackage = new JButton("Check Package");
         checkPackage.setBounds(0,196,300,50);
         checkPackage.setBackground(new Color(59, 153, 203));
         checkPackage.setForeground(Color.BLACK);
         checkPackage.setFont(new Font("Tahoma", Font.BOLD,20));
         checkPackage.setMargin(new Insets(0,0,0,60));
         checkPackage.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        checkPackage.addActionListener(this);
         p2.add(checkPackage);
 
         JButton bookPackage = new JButton("Book Package");
@@ -198,6 +200,10 @@ public class Dashboard extends JFrame implements ActionListener {
             new AddCustomer(username);
         } else if (ae.getSource() == viewPersonalDetails) {
             new ViewCustomer(username);
+        } else if (ae.getSource() == updatePersonalDetails) {
+            new UpdateCustomer(username);
+        } else if (ae.getSource() == checkPackage) {
+            new CheckPackage();
         }
     }
 
