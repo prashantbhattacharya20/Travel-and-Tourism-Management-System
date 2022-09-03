@@ -33,7 +33,7 @@ public class CheckPackage extends JFrame {
         p1.setBackground(Color.white);
 
         JLabel l1 = new JLabel(pack[0]);
-        l1.setBounds(40,5,300,50);
+        l1.setBounds(40,5,500,50);
         l1.setForeground(new Color(107, 107, 107));
         l1.setFont(new Font("Tahoma", Font.BOLD,40));
         p1.add(l1);
@@ -96,7 +96,7 @@ public class CheckPackage extends JFrame {
         Image img = i1.getImage().getScaledInstance(500,300,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(img);
         JLabel image = new JLabel(i2);
-        image.setBounds(350,80,500,300);
+        image.setBounds(350,90,500,300);
         p1.add(image);
 
         return p1;
