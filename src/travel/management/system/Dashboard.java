@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Dashboard extends JFrame implements ActionListener {
 
     String username;
-    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage,bookPackage,viewPackage;
+    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage,bookPackage,viewPackage,viewHotels,destinations;
 
     Dashboard(String username){
         this.username = username;
@@ -108,13 +108,14 @@ public class Dashboard extends JFrame implements ActionListener {
         viewPackage.addActionListener(this);
         p2.add(viewPackage);
 
-        JButton viewHotels = new JButton("View Hotels");
+        viewHotels = new JButton("View Hotels");
         viewHotels.setBounds(0,343,300,50);
         viewHotels.setBackground(new Color(59, 153, 203));
         viewHotels.setForeground(Color.BLACK);
         viewHotels.setFont(new Font("Tahoma", Font.BOLD,20));
         viewHotels.setMargin(new Insets(0,0,0,60));
         viewHotels.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        viewHotels.addActionListener(this);
         p2.add(viewHotels);
 
         JButton bookHotel = new JButton("Book Hotel");
@@ -135,13 +136,14 @@ public class Dashboard extends JFrame implements ActionListener {
         viewBookedHotel.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
         p2.add(viewBookedHotel);
 
-        JButton destinations = new JButton("Destinations");
+        destinations = new JButton("Destinations");
         destinations.setBounds(0,490,300,50);
         destinations.setBackground(new Color(59, 153, 203));
         destinations.setForeground(Color.BLACK);
         destinations.setFont(new Font("Tahoma", Font.BOLD,20));
         destinations.setMargin(new Insets(0,0,0,60));
         destinations.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        destinations.addActionListener(this);
         p2.add(destinations);
 
         JButton payment = new JButton("Payment");
@@ -210,6 +212,10 @@ public class Dashboard extends JFrame implements ActionListener {
             new BookPackage(username);
         } else if (ae.getSource() == viewPackage) {
             new ViewPackage(username);
+        } else if (ae.getSource() == viewHotels) {
+            new ViewHotels();
+        } else if (ae.getSource() == destinations) {
+            new Destinations();
         }
     }
 
