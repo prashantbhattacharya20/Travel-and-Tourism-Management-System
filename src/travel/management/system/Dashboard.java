@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Dashboard extends JFrame implements ActionListener {
 
     String username;
-    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage,bookPackage,viewPackage,viewHotels,destinations;
+    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage,bookPackage,viewPackage,viewHotels,destinations,bookHotel,viewBookedHotel;
 
     Dashboard(String username){
         this.username = username;
@@ -118,22 +118,24 @@ public class Dashboard extends JFrame implements ActionListener {
         viewHotels.addActionListener(this);
         p2.add(viewHotels);
 
-        JButton bookHotel = new JButton("Book Hotel");
+        bookHotel = new JButton("Book Hotel");
         bookHotel.setBounds(0,392,300,50);
         bookHotel.setBackground(new Color(59, 153, 203));
         bookHotel.setForeground(Color.BLACK);
         bookHotel.setFont(new Font("Tahoma", Font.BOLD,20));
         bookHotel.setMargin(new Insets(0,0,0,60));
         bookHotel.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        bookHotel.addActionListener(this);
         p2.add(bookHotel);
 
-        JButton viewBookedHotel = new JButton("View Booked Hotel");
+        viewBookedHotel = new JButton("View Booked Hotel");
         viewBookedHotel.setBounds(0,441,300,50);
         viewBookedHotel.setBackground(new Color(59, 153, 203));
         viewBookedHotel.setForeground(Color.BLACK);
         viewBookedHotel.setFont(new Font("Tahoma", Font.BOLD,20));
         viewBookedHotel.setMargin(new Insets(0,0,0,60));
         viewBookedHotel.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        viewBookedHotel.addActionListener(this);
         p2.add(viewBookedHotel);
 
         destinations = new JButton("Destinations");
@@ -216,7 +218,12 @@ public class Dashboard extends JFrame implements ActionListener {
             new ViewHotels();
         } else if (ae.getSource() == destinations) {
             new Destinations();
+        } else if (ae.getSource() == bookHotel) {
+            new BookHotel(username);
+        } else if (ae.getSource() == viewBookedHotel) {
+            new ViewBookedHotel(username);
         }
+
     }
 
     public static void main (String[] args){
