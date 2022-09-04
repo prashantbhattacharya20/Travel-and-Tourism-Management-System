@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class Dashboard extends JFrame implements ActionListener {
 
     String username;
-    JButton addPersonalDetails,viewPersonalDetails,updatePersonalDetails,checkPackage,bookPackage,viewPackage,viewHotels,destinations,bookHotel,viewBookedHotel;
+    JButton addPersonalDetails,deletePersonalDetails, updatePersonalDetails, viewPersonalDetails,checkPackage,bookPackage,viewPackage,viewHotels,destinations,bookHotel,viewBookedHotel,payment,calculator,notepad,about;
 
     Dashboard(String username){
         this.username = username;
@@ -59,13 +59,14 @@ public class Dashboard extends JFrame implements ActionListener {
         updatePersonalDetails.addActionListener(this);
         p2.add(updatePersonalDetails);
 
-        JButton deletePersonalDetails = new JButton("Delete Personal Details");
+        deletePersonalDetails = new JButton("Delete Personal Details");
         deletePersonalDetails.setBounds(0,98,300,50);
         deletePersonalDetails.setBackground(new Color(59, 153, 203));
         deletePersonalDetails.setForeground(Color.BLACK);
         deletePersonalDetails.setFont(new Font("Tahoma", Font.BOLD,20));
         deletePersonalDetails.setMargin(new Insets(0,0,0,60));
         deletePersonalDetails.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        deletePersonalDetails.addActionListener(this);
         p2.add(deletePersonalDetails);
 
         viewPersonalDetails = new JButton("View Personal Details");
@@ -148,40 +149,44 @@ public class Dashboard extends JFrame implements ActionListener {
         destinations.addActionListener(this);
         p2.add(destinations);
 
-        JButton payment = new JButton("Payment");
+        payment = new JButton("Payment");
         payment.setBounds(0,539,300,50);
         payment.setBackground(new Color(59, 153, 203));
         payment.setForeground(Color.BLACK);
         payment.setFont(new Font("Tahoma", Font.BOLD,20));
         payment.setMargin(new Insets(0,0,0,60));
         payment.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        payment.addActionListener(this);
         p2.add(payment);
 
-        JButton calculator = new JButton("Calculator");
+        calculator = new JButton("Calculator");
         calculator.setBounds(0,588,300,50);
         calculator.setBackground(new Color(59, 153, 203));
         calculator.setForeground(Color.BLACK);
         calculator.setFont(new Font("Tahoma", Font.BOLD,20));
         calculator.setMargin(new Insets(0,0,0,60));
         calculator.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        calculator.addActionListener(this);
         p2.add(calculator);
 
-        JButton notepad = new JButton("Notepad");
+        notepad = new JButton("Notepad");
         notepad.setBounds(0,637,300,50);
         notepad.setBackground(new Color(59, 153, 203));
         notepad.setForeground(Color.BLACK);
         notepad.setFont(new Font("Tahoma", Font.BOLD,20));
         notepad.setMargin(new Insets(0,0,0,60));
         notepad.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        notepad.addActionListener(this);
         p2.add(notepad);
 
-        JButton about = new JButton("About");
+        about = new JButton("About");
         about.setBounds(0,686,300,50);
         about.setBackground(new Color(59, 153, 203));
         about.setForeground(Color.BLACK);
         about.setFont(new Font("Tahoma", Font.BOLD,20));
         about.setMargin(new Insets(0,0,0,60));
         about.setBorder(BorderFactory.createLineBorder(new Color(10, 75, 102)));
+        about.addActionListener(this);
         p2.add(about);
 
         ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icons/home.jpg"));
@@ -208,6 +213,8 @@ public class Dashboard extends JFrame implements ActionListener {
             new ViewCustomer(username);
         } else if (ae.getSource() == updatePersonalDetails) {
             new UpdateCustomer(username);
+        } else if (ae.getSource() == deletePersonalDetails) {
+            new DeleteDetails(username);
         } else if (ae.getSource() == checkPackage) {
             new CheckPackage();
         } else if (ae.getSource() == bookPackage) {
@@ -222,6 +229,22 @@ public class Dashboard extends JFrame implements ActionListener {
             new BookHotel(username);
         } else if (ae.getSource() == viewBookedHotel) {
             new ViewBookedHotel(username);
+        } else if (ae.getSource() == payment) {
+            new Payment();
+        } else if (ae.getSource() == calculator) {
+            try{
+               Runtime.getRuntime().exec("calc.exe");
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == notepad) {
+            try{
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        } else if (ae.getSource() == about){
+            new About();
         }
 
     }
