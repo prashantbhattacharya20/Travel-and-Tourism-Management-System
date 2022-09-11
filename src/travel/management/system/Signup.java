@@ -116,6 +116,8 @@ public class Signup extends JFrame implements ActionListener {
                 c.s.executeUpdate(query);
 
                 JOptionPane.showMessageDialog(null, "Account Created Successfully");
+                new Login();
+                setVisible(false);
             } catch (Exception e){
                 e.printStackTrace();
             }
